@@ -1,0 +1,32 @@
+record(ai, "$(BL):$(DEV):temp")
+{
+  field(PREC, "1")
+  field(EGU, "C")
+}
+
+record(ai, "$(BL):$(DEV):humid")
+{ 
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(BL):$(DEV):vco")
+{
+  field(PREC, "3")
+  field(EGU, "Ohms")
+}
+
+record(ai, "$(BL):$(DEV):pressure")
+{
+  field(PREC, "3")
+  field(EGU, "mbar")
+}
+
+record(ao, "$(BL):$(DEV):sleep")
+{
+  field(PREC, "0")
+  field(EGU, "seconds")
+  field(VAL, "1")
+}
+
+

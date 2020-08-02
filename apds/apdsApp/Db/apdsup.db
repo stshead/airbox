@@ -1,0 +1,45 @@
+record(ai, "$(BL):$(DEV):clear")
+{
+  field(DTYP, "ApdsAi")
+  field(INP, "@D_clear")
+  field(SCAN, "Event")
+  field(EVNT, "UPDT")
+  field(PREC, "3")
+}
+
+record(ai, "$(BL):$(DEV):red")
+{
+  field(DTYP, "ApdsAi")
+  field(INP, "@D_red")
+  field(SCAN, "Event")
+  field(EVNT, "UPDT")
+  field(PREC, "3")
+}
+
+record(ai, "$(BL):$(DEV):green")
+{
+  field(DTYP, "ApdsAi")
+  field(INP, "@D_green")
+  field(SCAN, "Event")
+  field(EVNT, "UPDT")
+  field(PREC, "3")
+}
+
+record(ai, "$(BL):$(DEV):blue")
+{
+  field(DTYP, "ApdsAi")
+  field(INP, "@D_blue")
+  field(SCAN, "Event")
+  field(EVNT, "UPDT")
+  field(PREC, "3")
+}
+
+record(ao, "$(BL):$(DEV):sleep")
+{
+  field(DTYP, "ApdsAo")
+  field(OUT, "@D_sleep")
+  field(PREC, "0")
+}
+
+
+
