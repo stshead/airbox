@@ -1,0 +1,15 @@
+record(waveform, "$(BL):$(DEV):display")
+{
+  field(DTYP, "OledSup")
+  field(INP, "@display")
+  field(FTVL, "UCHAR")
+  field(NELM, "1024")
+}
+
+record(ao, "$(BL):$(DEV):page")
+{
+}
+
+
+
+
