@@ -1,7 +1,8 @@
 record(compress, "$(BL):$(DEV):$(R)")
 {
   field(DESC, "$(DESC)")
-  field(INP, "$(SRC) CPP")
+  field(SCAN, "10 second")
+  field(INP, "$(SRC)")
   field(PREC, "$(PREC)")
   field(ALG, "N to 1 Average")
   field(N, "$(N)")

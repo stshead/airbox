@@ -26,7 +26,7 @@ record(ao, "$(BL):$(DEV):sleep")
 {
   field(PREC, "0")
   field(EGU, "sec")
-  field(VAL, "10")
+  field(VAL, "9")
 }
 
 

@@ -39,7 +39,7 @@ record(ao, "$(BL):$(DEV):sleep")
   field(DTYP, "ApdsAo")
   field(OUT, "@D_sleep")
   field(PREC, "0")
-  field(VAL, "10")
+  field(VAL, "9")
 }
 
 
