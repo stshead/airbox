@@ -15,6 +15,9 @@ apds_registerRecordDeviceDriver pdbbase
 dbLoadRecords("db/apdsup.db","BL=AIRBOX,DEV=APDS")
 
 cd "${TOP}/iocBoot/${IOC}"
+
+dbLoadTemplate("apds.subst")
+
 iocInit
 
 ## Start any sequence programs

@@ -1,0 +1,29 @@
+file "$(TOP)/db/compress.db"
+{ pattern
+{    BL,  DEV,            R,          DESC,  N, NSAM,                 SRC, PREC}
+{AIRBOX, BME, "temp:p10m", "Period: 10m",   1,   60, "AIRBOX:BME:temp",    1}
+{AIRBOX, BME, "temp:p1h" , "Period: 1h" ,   3,  180, "AIRBOX:BME:temp",    1}
+{AIRBOX, BME, "temp:p12h", "Period: 12h",  43,  100, "AIRBOX:BME:temp",    1}
+{AIRBOX, BME, "temp:p24h", "Period: 24h",  86,  100, "AIRBOX:BME:temp",    1}
+{AIRBOX, BME, "temp:p1w" , "Period: 1w" , 602,  100, "AIRBOX:BME:temp",    1}
+
+{AIRBOX, BME, "humid:p10m", "Period: 10m",   1,   60, "AIRBOX:BME:humid",    1}
+{AIRBOX, BME, "humid:p1h" , "Period: 1h" ,   3,  180, "AIRBOX:BME:humid",    1}
+{AIRBOX, BME, "humid:p12h", "Period: 12h",  43,  100, "AIRBOX:BME:humid",    1}
+{AIRBOX, BME, "humid:p24h", "Period: 24h",  86,  100, "AIRBOX:BME:humid",    1}
+{AIRBOX, BME, "humid:p1w" , "Period: 1w" , 602,  100, "AIRBOX:BME:humid",    1}
+
+{AIRBOX, BME, "vco:p10m", "Period: 10m",   1,   60, "AIRBOX:BME:vco",    1}
+{AIRBOX, BME, "vco:p1h" , "Period: 1h" ,   3,  180, "AIRBOX:BME:vco",    1}
+{AIRBOX, BME, "vco:p12h", "Period: 12h",  43,  100, "AIRBOX:BME:vco",    1}
+{AIRBOX, BME, "vco:p24h", "Period: 24h",  86,  100, "AIRBOX:BME:vco",    1}
+{AIRBOX, BME, "vco:p1w" , "Period: 1w" , 602,  100, "AIRBOX:BME:vco",    1}
+
+{AIRBOX, BME, "pressure:p10m", "Period: 10m",   1,   60, "AIRBOX:BME:pressure",    1}
+{AIRBOX, BME, "pressure:p1h" , "Period: 1h" ,   3,  180, "AIRBOX:BME:pressure",    1}
+{AIRBOX, BME, "pressure:p12h", "Period: 12h",  43,  100, "AIRBOX:BME:pressure",    1}
+{AIRBOX, BME, "pressure:p24h", "Period: 24h",  86,  100, "AIRBOX:BME:pressure",    1}
+{AIRBOX, BME, "pressure:p1w" , "Period: 1w" , 602,  100, "AIRBOX:BME:pressure",    1}
+
+
+}

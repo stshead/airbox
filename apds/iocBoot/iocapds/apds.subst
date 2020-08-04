@@ -1,0 +1,29 @@
+file "$(TOP)/db/compress.db"
+{ pattern
+{    BL,  DEV,            R,          DESC,  N, NSAM,                 SRC, PREC}
+{AIRBOX, APDS, "clear:p10m", "Period: 10m",   1,   60, "AIRBOX:APDS:clear",    1}
+{AIRBOX, APDS, "clear:p1h" , "Period: 1h" ,   3,  180, "AIRBOX:APDS:clear",    1}
+{AIRBOX, APDS, "clear:p12h", "Period: 12h",  43,  100, "AIRBOX:APDS:clear",    1}
+{AIRBOX, APDS, "clear:p24h", "Period: 24h",  86,  100, "AIRBOX:APDS:clear",    1}
+{AIRBOX, APDS, "clear:p1w" , "Period: 1w" , 602,  100, "AIRBOX:APDS:clear",    1}
+
+{AIRBOX, APDS, "red:p10m", "Period: 10m",   1,   60, "AIRBOX:APDS:red",    1}
+{AIRBOX, APDS, "red:p1h" , "Period: 1h" ,   3,  180, "AIRBOX:APDS:red",    1}
+{AIRBOX, APDS, "red:p12h", "Period: 12h",  43,  100, "AIRBOX:APDS:red",    1}
+{AIRBOX, APDS, "red:p24h", "Period: 24h",  86,  100, "AIRBOX:APDS:red",    1}
+{AIRBOX, APDS, "red:p1w" , "Period: 1w" , 602,  100, "AIRBOX:APDS:red",    1}
+
+{AIRBOX, APDS, "green:p10m", "Period: 10m",   1,   60, "AIRBOX:APDS:green",    1}
+{AIRBOX, APDS, "green:p1h" , "Period: 1h" ,   3,  180, "AIRBOX:APDS:green",    1}
+{AIRBOX, APDS, "green:p12h", "Period: 12h",  43,  100, "AIRBOX:APDS:green",    1}
+{AIRBOX, APDS, "green:p24h", "Period: 24h",  86,  100, "AIRBOX:APDS:green",    1}
+{AIRBOX, APDS, "green:p1w" , "Period: 1w" , 602,  100, "AIRBOX:APDS:green",    1}
+
+{AIRBOX, APDS, "blue:p10m", "Period: 10m",   1,   60, "AIRBOX:APDS:blue",    1}
+{AIRBOX, APDS, "blue:p1h" , "Period: 1h" ,   3,  180, "AIRBOX:APDS:blue",    1}
+{AIRBOX, APDS, "blue:p12h", "Period: 12h",  43,  100, "AIRBOX:APDS:blue",    1}
+{AIRBOX, APDS, "blue:p24h", "Period: 24h",  86,  100, "AIRBOX:APDS:blue",    1}
+{AIRBOX, APDS, "blue:p1w" , "Period: 1w" , 602,  100, "AIRBOX:APDS:blue",    1}
+
+
+}

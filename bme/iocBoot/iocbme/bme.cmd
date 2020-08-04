@@ -15,6 +15,9 @@ bme_registerRecordDeviceDriver pdbbase
 dbLoadRecords("db/bme.db","BL=AIRBOX,DEV=BME")
 
 cd "${TOP}/iocBoot/${IOC}"
+
+dbLoadTemplate("bme.subst")
+
 iocInit
 
 ## Start any sequence programs
