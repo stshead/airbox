@@ -4,6 +4,8 @@ import bme680
 import time
 import epics
 
+temp_offset = 3.0
+
 ## Setup sensor
 sensor = bme680.BME680(bme680.I2C_ADDR_SECONDARY)
 
@@ -26,7 +28,7 @@ sleep = epics.PV("AIRBOX:BME:sleep", auto_monitor=True)
 print("Running bme sensor loop...")
 while(1):
     sensor.get_sensor_data()
-    temp.put(sensor.data.temperature)
+    temp.put(sensor.data.temperature - temp_offset)
     humid.put(sensor.data.humidity)
     vco.put(sensor.data.gas_resistance)
     pressure.put(sensor.data.pressure)
