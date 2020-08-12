@@ -5,7 +5,11 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import time
 
-NumOfPages = 5
+import astral
+import pytz
+from astral.sun import sun
+
+NumOfPages = 7
 light_min = 80
 light_max = 150
 
@@ -23,6 +27,7 @@ bmepressurepv = epics.PV("AIRBOX:BME:pressure", auto_monitor=True)
 bmevcopv = epics.PV("AIRBOX:BME:vco", auto_monitor=True)
 
 temp1hpv = epics.PV("AIRBOX:BME:temp:p1h", auto_monitor=True)
+humid1hpv = epics.PV("AIRBOX:BME:humid:p1h", auto_monitor=True)
 
 canv = Image.new("1", (128,64), 0)
 dr = ImageDraw.Draw(canv)
@@ -35,6 +40,16 @@ font4 = ImageFont.truetype("Ubuntu-B.ttf", 24)
 font5 = ImageFont.truetype("Ubuntu-B.ttf", 28)
 font6 = ImageFont.truetype("Ubuntu-Th.ttf", 12)
 
+## sunrise sunset constants and global variables
+mycity = astral.LocationInfo(name='Berlin', region='Germany', timezone='Europe/Berlin', latitude=52.4217, longitude=13.5702)
+observer = mycity.observer
+observer.elevation = 90.0
+Berlin_tz = pytz.timezone(mycity.timezone)
+lastday = 0
+sunrise_m = 0
+sunset_m = int(24*60)
+
+## pages
 def page1():
     #font = ImageFont.truetype("ubuntu/Ubuntu-B.ttf", 50)
     now = time.localtime()
@@ -126,7 +141,7 @@ def page5():
     tstr = "{:.1f} °C".format(temp)
 
     temp1h = np.array(temp1hpv.value)
-    temp1h = temp1h[0:128]
+    temp1h = temp1h[-128:]
     plmax = np.max(temp1h)
     plmin = np.min(temp1h)
     pldif = plmax-plmin
@@ -140,6 +155,79 @@ def page5():
             y0 = 64-int(np.round(barsize*((raw-plmin)/pldif)))
             #print("[{:d}]:{:d}".format(i,y0))
             dr.line((i,y0,i,64), fill=1, width=1)
+
+def page6():
+    barsize = 32
+
+    humid = bmehumidpv.value
+    tstr = "{:.1f} %".format(humid)
+
+    temp1h = np.array(humid1hpv.value)
+    temp1h = temp1h[-128:]
+    plmax = np.max(temp1h)
+    plmin = np.min(temp1h)
+    pldif = plmax-plmin
+
+    dr.rectangle((0,0,128,64), fill=0)
+    dr.text((0,0), tstr, font=font5, fill=1)
+
+    if(pldif>0):
+        for i in range(128):
+            raw = temp1h[i]
+            y0 = 64-int(np.round(barsize*((raw-plmin)/pldif)))
+            dr.line((i,y0,i,64), fill=1, width=1)
+
+def page7():
+    global lastday
+    global sunrise_m
+    global sunset_m
+
+    now = time.localtime()
+    hh = now.tm_hour
+    mm = now.tm_min
+    today = now.tm_mday
+
+    ## partial clock setup
+    daybegin = 8
+    dayend = 23
+
+    daymin = (hh*60)+mm
+    minbegin = daybegin*60
+    minend = dayend*60
+    if( (daymin>=minbegin) and (daymin<=minend) ):
+        tleft=(minend-daymin)/float(minend-minbegin)
+    else:
+        tleft=0
+
+    ## angle for partial clock
+    pangle=(180*(1-tleft))-90
+
+    ## angle for 24h clock
+    cangle=90+(-360*(1-(daymin/float(24*60))))
+
+    ## sunrise sunset calculation
+    if(lastday!=today):
+        lastday=today
+        mysun = sun(observer, astral.today())
+        sunrise = mysun['sunrise'].astimezone(Berlin_tz)
+        sunset = mysun['sunset'].astimezone(Berlin_tz)
+        sunrise_m = int((sunrise.hour*60)+sunrise.minute)
+        sunset_m = int((sunset.hour*60)+sunset.minute)
+
+    now_m = (now.tm_hour*60)+now.tm_min
+
+    if( (now_m<sunrise_m) or (now_m>sunset_m) ):
+        sunscale=0
+    else:
+        sunscale=1-((now_m-sunrise_m)/(sunset_m-sunrise_m))
+
+    sunangle = (180*sunscale)+90
+
+    ## draw
+    dr.rectangle((0,0,128,64), fill=0)
+    dr.arc((-30,0,30,60),pangle,90,fill=1,width=20)
+    dr.arc((34,0,94,60),cangle,90,fill=1,width=20)
+    dr.arc((98,0,158,60),90,sunangle,fill=1,width=20)
 
 def updatedisplay():
     buf = np.array(list(canv.tobytes()), dtype=np.uint8)
@@ -184,6 +272,14 @@ while(1):
             isblank=False
         elif(page==5):
             page5()
+            updatedisplay()
+            isblank=False
+        elif(page==6):
+            page6()
+            updatedisplay()
+            isblank=False
+        elif(page==7):
+            page7()
             updatedisplay()
             isblank=False
         else:
